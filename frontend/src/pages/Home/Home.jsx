@@ -15,8 +15,6 @@ function Home() {
     }
   }  
 
-
-
   // Fetch a page of movies on the database
   useEffect(() => {
     axios
