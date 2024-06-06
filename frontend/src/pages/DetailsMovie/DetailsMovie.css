@@ -2,27 +2,37 @@
 
 .details {
     display: flex;
-    padding-left: 50px;
-    padding-right: 50px;
-    background-color: rgb(2, 2, 35);
-    height: 80%;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-color: rgb(26, 4, 4);
+    height: 60%;
 }
 
 .details-image-container {
 display: flex;
 justify-content:center;
+align-content: space-around;
+align-items:center ;
+flex-direction: column;
 width: 50%;
-padding: 0px;
+padding: 0%;
 margin: 0px;
 
 }
 
 .details-image {
-    height: 400px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+  margin:0px;
 }
+.details-right-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+    
+    }
 
+    
 .details-info-container {
 display: flex;
 flex-direction: column;
@@ -33,6 +43,8 @@ padding-left:10%;
 padding-right: 10%;
 
 }
+
+
 
 
 
@@ -67,4 +79,45 @@ padding-right: 10%;
     text-align: center;
     font-size: 16px;
     font-weight: 600;
+}
+
+.button-container {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+}
+
+.Like {
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    margin-right: 50px;
+
+}
+
+.like-icon:hover {
+    color: green;
+}
+
+.dislike-icon:hover {
+    color: red;
+}
+
+
+
+
+
+.Dislike {
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+
+}
+
+.dislike-icon:hover {
+    color: red;
 }

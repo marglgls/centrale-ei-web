@@ -25,12 +25,12 @@ function Home() {
         <p>
           Qu'allez-vous regarder aujourd'hui ? 
         </p>
-        <input placeholder="Rechercher un film" value={movieName} onChange={e => setMovieName(e.target.value)}/>
+        <input className="search-bar" placeholder="Rechercher un film" value={movieName} onChange={e => setMovieName(e.target.value)}/>
         <div className="movie-container">
           {listMovies}
         </div> 
         <div className="footer">
-          {page !==1 && (<button id="pageMinus" onClick={()=>{modifyPage(-1)}}> &#60; Page précédente </button>)} | <button id="pagePlus" onClick={()=>{modifyPage(1)}}> Page suivante &#62; </button>
+          {page !==1 && (<button className="previous-page-button" id="pageMinus" onClick={()=>{modifyPage(-1)}}> </button>)} &nbsp; <button className="next-page-button" id="pagePlus" onClick={()=>{modifyPage(1)}}> </button>
         </div>
     </div>
   );

@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: rgb(6, 0, 0);
 }
 
 .App-logo {
@@ -27,16 +28,89 @@
 }
 
 div {
-  border: 1px solid pink;
+  border: 0px solid pink;
+}
+
+.search-bar {
+
+  margin-bottom: 20px;
+  width:60%;
+  background-color:rgb(94, 54, 54);
+  height: 25px;
+  border-radius: 20px;
+  border: 1px solid rgb(127, 95, 95);
+}
+
+input::placeholder {
+  text-align: center;
 }
 
 .movie-container {
   display : flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 
-.search {
-  width:800px;
-  height: 20px;
+.footer {
+  padding: 20px
+}
+
+.previous-page-button {
+  width: 0;
+  height: 0;
+  border-bottom: 20px solid transparent;
+  border-top: 20px solid transparent;
+  border-right: 35px solid #9d2020;
+  border-left: 0px;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  margin: 0px;
+  padding: 0px;
+
+
+}
+
+.next-page-button {
+  width: 0;
+  height: 0;
+  border-bottom: 20px solid transparent;
+  border-top: 20px solid transparent;
+  border-left: 35px solid #9d2020;
+  border-right: 0px;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  margin: 0px;
+  padding: 0px;
+
+}
+
+
+.previous-page-button:hover {
+  width: 0;
+  height: 0;
+  border-bottom: 20px solid transparent;
+  border-top: 20px solid transparent;
+  border-right: 35px solid #1d0a0a;
+  border-left: 0px;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.next-page-button:hover {
+  width: 0;
+  height: 0;
+  border-bottom: 20px solid transparent;
+  border-top: 20px solid transparent;
+  border-left: 35px solid #1d0a0a;
+  border-right: 0px;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  margin: 0px;
+  padding: 0px;
 }
