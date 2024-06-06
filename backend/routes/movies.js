@@ -87,8 +87,25 @@ router.delete('/id', function (req, res) {
   });
 
 
+  router.get('/page/:number_page', function (req, res) {
+    const page = parseInt(req.params.number_page, 10);
+    const moviesPerPage = 20;
+    const skip = (page - 1) * moviesPerPage;
+    appDataSource
+      .getRepository(Movie)
+      .find({
+        order: { popularity: 'DESC' },
+        skip: skip,
+        take: moviesPerPage,
+       })
+      .then(function (movies) {
+        res.json({ movies: movies });
+      });
+  });
+
+
   router.get('/search/:title', function (req, res) {
-    console.log(req);
+    //console.log(req);
     appDataSource
     .getRepository(Movie)
     .find({
