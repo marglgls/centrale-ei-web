@@ -88,18 +88,20 @@ router.delete('/id', function (req, res) {
 
 
   router.get('/search/:title', function (req, res) {
+    console.log(req);
     appDataSource
     .getRepository(Movie)
     .find({
       where : {title: Like(`%${req.params.title}%`)}, 
-      //order: { popularity: 'DESC' } 
+      order: { popularity: 'DESC' } 
     })
     .then(function (movies) {
       res.json({ movies: movies });
     }).catch(function (error) {
       res.status(404).json({ error: 'Not found!' });
     });
-  });
+}
+  );
 
 
 

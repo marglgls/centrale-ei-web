@@ -68,7 +68,7 @@ function Home() {
         <p>
           Qu'allez-vous regarder aujourd'hui ? 
         </p>
-        <input className="search-bar" placeholder="Rechercher un film" value={movieName} onChange={e => setMovieName(e.target.value)}/>
+        <input className="search-bar" placeholder="Rechercher un film" value={movieTitle} onChange={e => setMovieTitle(e.target.value)}/>
         <div className="movie-container">
           {movieList.map(movie => <Movie key={movie.id} data={movie}/>)}
         </div> 
