@@ -14,7 +14,8 @@ export function useFetchMovies(page) {
   }})
   .then((response) => {
 		setMovieList(response.data.results);
-    console.log(response.data);
+    console.log('réponse')
+    console.log(response.data.results);
   })
   .catch((error) => {
 		// Do something if call failed

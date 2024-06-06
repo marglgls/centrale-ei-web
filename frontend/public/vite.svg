@@ -1,1 +1,56 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--logos" width="31.88" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 257"><defs><linearGradient id="IconifyId1813088fe1fbc01fb466" x1="-.828%" x2="57.636%" y1="7.652%" y2="78.411%"><stop offset="0%" stop-color="#41D1FF"></stop><stop offset="100%" stop-color="#BD34FE"></stop></linearGradient><linearGradient id="IconifyId1813088fe1fbc01fb467" x1="43.376%" x2="50.316%" y1="2.242%" y2="89.03%"><stop offset="0%" stop-color="#FFEA83"></stop><stop offset="8.333%" stop-color="#FFDD35"></stop><stop offset="100%" stop-color="#FFA800"></stop></linearGradient></defs><path fill="url(#IconifyId1813088fe1fbc01fb466)" d="M255.153 37.938L134.897 252.976c-2.483 4.44-8.862 4.466-11.382.048L.875 37.958c-2.746-4.814 1.371-10.646 6.827-9.67l120.385 21.517a6.537 6.537 0 0 0 2.322-.004l117.867-21.483c5.438-.991 9.574 4.796 6.877 9.62Z"></path><path fill="url(#IconifyId1813088fe1fbc01fb467)" d="M185.432.063L96.44 17.501a3.268 3.268 0 0 0-2.634 3.014l-5.474 92.456a3.268 3.268 0 0 0 3.997 3.378l24.777-5.718c2.318-.535 4.413 1.507 3.936 3.838l-7.361 36.047c-.495 2.426 1.782 4.5 4.151 3.78l15.304-4.649c2.372-.72 4.652 1.36 4.15 3.788l-11.698 56.621c-.732 3.542 3.979 5.473 5.943 2.437l1.313-2.028l72.516-144.72c1.215-2.423-.88-5.186-3.54-4.672l-25.505 4.922c-2.396.462-4.435-1.77-3.759-4.114l16.646-57.705c.677-2.35-1.37-4.583-3.769-4.113Z"></path></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 595.28 841.89">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        font-family: Haettenschweiler, Haettenschweiler;
+        font-size: 92px;
+        letter-spacing: .06em;
+      }
+
+      .cls-1, .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-4 {
+        fill: #ffed00;
+      }
+
+      .cls-4, .cls-3 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: #e30613;
+      }
+
+      .cls-5 {
+        fill: #1d1d1b;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <rect class="cls-5" x="95.4" y="343" width="450.6" height="243"/>
+  <g>
+    <rect class="cls-5" x="90.18" y="213.92" width="450.6" height="49" transform="translate(-30.08 46.17) rotate(-7.99)"/>
+    <polygon class="cls-3" points="112.49 291.65 159.37 285.07 208.74 229.05 162.75 235.12 112.49 291.65"/>
+    <polygon class="cls-3" points="215.49 277.2 262.38 270.62 311.74 214.59 265.75 220.66 215.49 277.2"/>
+    <polygon class="cls-3" points="318.5 262.74 365.38 256.16 414.74 200.14 368.76 206.2 318.5 262.74"/>
+    <polygon class="cls-3" points="421.5 248.28 468.38 241.7 517.74 185.68 471.76 191.75 421.5 248.28"/>
+  </g>
+  <g>
+    <rect class="cls-5" x="95.4" y="294" width="450.6" height="49" transform="translate(641.4 637) rotate(-180)"/>
+    <polygon class="cls-3" points="529.12 343 481.78 343 425.11 294.38 471.49 294 529.12 343"/>
+    <polygon class="cls-3" points="425.11 343 377.76 343 321.1 294.38 367.48 294 425.11 343"/>
+    <polygon class="cls-3" points="321.1 343 273.75 343 217.08 294.38 263.46 294 321.1 343"/>
+    <polygon class="cls-3" points="217.08 343 169.74 343 113.07 294.38 159.45 294 217.08 343"/>
+  </g>
+  <g>
+    <text class="cls-1" transform="translate(132.39 491.25)"><tspan x="0" y="0">CINEMATICS</tspan></text>
+    <text class="cls-2" transform="translate(135.39 489.25)"><tspan x="0" y="0">CINEMATICS</tspan></text>
+  </g>
+  <polygon class="cls-4" points="121.78 470.79 113.62 465.03 105.62 471.01 108.58 461.47 100.42 455.72 110.4 455.58 113.36 446.04 116.57 455.49 126.56 455.35 118.56 461.33 121.78 470.79"/>
+  <polygon class="cls-4" points="534.52 470.79 526.36 465.03 518.36 471.01 521.32 461.47 513.16 455.72 523.14 455.58 526.1 446.04 529.31 455.49 539.3 455.35 531.3 461.33 534.52 470.79"/>
+  <text/>
+</svg>
