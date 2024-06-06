@@ -29,8 +29,14 @@
 
 .movie-image {
     width : 200px;
+    transition: transform 0.2 ease-in-out;
 
 }
 
+.movie-image:hover {
+    width: 220px;
+    z-index: 20; 
+    position: absolute;
+}
 
 

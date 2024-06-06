@@ -71,27 +71,13 @@ function DetailsMovie(props) {
             <span className="details-description"> <p>{movieData.overview}</p> </span> <br/>
             <span className="details-duration"> Durée : {movieData.runtime} min </span> <br/>
           </div>
-          
-          <div classname="button-container">
+          <div className="button-container">
             <button className="Like"><AiFillLike style={{ color: color, cursor: 'pointer' }} 
-        onClick={handleClick} className="like-icon" size={30}/></button>
-
+              onClick={handleClick} className="like-icon" size={30}/></button>
             <button className="Dislike"><AiFillDislike style={{ color: colorD, cursor: 'pointer' }} 
-        onClick={handleClickD} className="dislike-icon" size={30}/></button>
+            onClick={handleClickD} className="dislike-icon" size={30}/></button>
           </div>
         </div>
-
-        
-        
-        
-        {/*<span> Bugdet : ${movieData.budget}  </span> <br/>
-        
-        <span> Langue d'origine : {movieData.original_language} </span> <br/>
-        
-        
-
-        <img src={`https://image.tmdb.org/t/p/w500${movieData.backdrop_path}`} alt="img"/>
-    */}
       </div>
 
 
@@ -100,3 +86,12 @@ function DetailsMovie(props) {
   }
   
   export default DetailsMovie;
+
+  {/*<span> Bugdet : ${movieData.budget}  </span> <br/>
+        
+        <span> Langue d'origine : {movieData.original_language} </span> <br/>
+        
+        
+
+        <img src={`https://image.tmdb.org/t/p/w500${movieData.backdrop_path}`} alt="img"/>
+    */}

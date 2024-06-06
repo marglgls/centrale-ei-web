@@ -1,12 +1,14 @@
 
+div {
+    border: 0px solid pink;
+}
+
 
 .details {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
+    border-radius: 40px;
     background-color: rgb(26, 4, 4);
-    height: 60%;
+    margin: 5%;
 }
 
 .details-image-container {
@@ -15,21 +17,19 @@ justify-content:center;
 align-content: space-around;
 align-items:center ;
 flex-direction: column;
-width: 50%;
-padding: 0%;
-margin: 0px;
 
 }
 
 .details-image {
-  margin:0px;
+    height: 400px;
+    margin: 30px;
+    padding-left: 20%;
 }
 .details-right-container {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-content: center;
-    
+    align-content: center; 
     }
 
     
@@ -38,15 +38,10 @@ display: flex;
 flex-direction: column;
 justify-content: space-around;
 align-content: center;
-width: 40%;
 padding-left:10%;
-padding-right: 10%;
+padding-right: 20%;
 
 }
-
-
-
-
 
 
 
@@ -55,6 +50,7 @@ padding-right: 10%;
     font-size: 40px;   
     font-weight: 900;
     font-variant: small-caps;
+    margin-bottom: 10px;
     
 
 }
@@ -62,6 +58,7 @@ padding-right: 10%;
 .details-date {
     text-align: center;
     font-size: 12px;
+    margin-bottom: 5px;
 }
 
 .details-genre {
@@ -84,9 +81,8 @@ padding-right: 10%;
 .button-container {
     display:flex;
     justify-content: center;
-    align-items: center;
-    align-content: center;
-    width: 100%;
+    padding-right: 20%;
+    padding-right: 10%;
 }
 
 .Like {
@@ -105,11 +101,6 @@ padding-right: 10%;
 .dislike-icon:hover {
     color: red;
 }
-
-
-
-
-
 .Dislike {
     border-radius: 10px;
     width: 40px;
