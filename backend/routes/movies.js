@@ -2,13 +2,12 @@ import express from 'express';
 import { appDataSource } from '../datasource.js';
 import Movie from '../entities/movies.js';
 const router = express.Router();
-
-const { Like } = require('typeorm');
+import { Like } from "typeorm";
 
 router.get('/', function (req, res) {
     appDataSource
       .getRepository(Movie)
-      .find({})
+      .find({order: { popularity: 'DESC' } })
       .then(function (movies) {
         res.json({ movies: movies });
       });
@@ -19,7 +18,7 @@ router.get('/id', function (req, res) {
     .getRepository(Movie)
     .find({
         where: {
-        id: req.body.id
+        id: req.params.movieId
         },
     })
     .then(function (movies) {
@@ -46,7 +45,7 @@ router.get('/id', function (req, res) {
 router.post('/new', function (req, res) {
     const movieRepository = appDataSource.getRepository(Movie);
     const newMovie = movieRepository.create({
-      name: req.body.name,
+      title: req.body.title,
       release_date: req.body.release_date,
   });
   
@@ -91,7 +90,10 @@ router.delete('/id', function (req, res) {
   router.get('/search/:title', function (req, res) {
     appDataSource
     .getRepository(Movie)
-    .find({where : {title: Like(`%${req.params.title}%`)}})
+    .find({
+      where : {title: Like(`%${req.params.title}%`)}, 
+      //order: { popularity: 'DESC' } 
+    })
     .then(function (movies) {
       res.json({ movies: movies });
     }).catch(function (error) {
@@ -99,7 +101,7 @@ router.delete('/id', function (req, res) {
     });
   });
 
-  
+
 
 
 export default router;

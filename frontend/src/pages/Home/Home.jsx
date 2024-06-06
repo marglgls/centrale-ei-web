@@ -1,21 +1,64 @@
 import logo from './logo.svg';
 import './Home.css';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useFetchMovies } from './useFetchMovies.jsx'
+//import { useFetchMovies } from './useFetchMovies.jsx'
 import Movie from '../../components/Movie/Movie.jsx';
 
 function Home() {
-  const [movieName, setMovieName] = useState('');
+  const [movieTitle, setMovieTitle] = useState('');
   const [page, setPage] = useState(1);
-  const {movieList} = useFetchMovies(page);
-  //console.log(movieList);
-  const listMovies = movieList.map(movie => <Movie key={movie.id} data={movie}/>);
+  const [movieList, setMovieList] = useState([]);
+
+  //const { movieList } = useFetchMovies(page);
+
+  //const listMovies = movieList.map(movie => <Movie key={movie.id} data={movie}/>);
   
   const modifyPage = (c) => {
     if (1 <= page + c ) {
       setPage(page + c);
     }
   }  
+
+  // Fetch a page of movies on TMDB
+  useEffect(() => {
+    axios
+  .get(`https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}`, {headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZjlmNjAwMzY4MzMzODNkNGIwYjNhNzJiODA3MzdjNCIsInN1YiI6IjY0NzA5YmE4YzVhZGE1MDBkZWU2ZTMxMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Em7Y9fSW94J91rbuKFjDWxmpWaQzTitxRKNdQ5Lh2Eo'
+  }})
+  .then((response) => {
+		setMovieList(response.data.results);
+    console.log(response.data.results);
+  })
+  .catch((error) => {
+		// Do something if call failed
+		console.log(error)
+  });
+  }, [page]);
+
+
+  // Fetch by title
+
+  useEffect(() => {
+    if (movieTitle == '') {
+      // Reset page to initial one
+      setPage(1);
+    } else {
+      console.log(movieTitle);
+          axios
+      .get(`http://localhost:8000/movies/search/${movieTitle}`)
+      .then((response) => {
+        setMovieList(response.data.movies);
+        console.log(response.data.movies);
+      })
+      .catch((error) => {
+        // Do something if call failed
+        console.log(error)
+  });
+    }
+  },[movieTitle]);
+
 
 
   return (
@@ -27,7 +70,7 @@ function Home() {
         </p>
         <input className="search-bar" placeholder="Rechercher un film" value={movieName} onChange={e => setMovieName(e.target.value)}/>
         <div className="movie-container">
-          {listMovies}
+          {movieList.map(movie => <Movie key={movie.id} data={movie}/>)}
         </div> 
         <div className="footer">
           {page !==1 && (<button className="previous-page-button" id="pageMinus" onClick={()=>{modifyPage(-1)}}> </button>)} &nbsp; <button className="next-page-button" id="pagePlus" onClick={()=>{modifyPage(1)}}> </button>
