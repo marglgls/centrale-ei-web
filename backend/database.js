@@ -17,7 +17,7 @@ async function FetchMovies() {
             movie_list = movie_list.concat(response.data.results);
             //console.log(response.data.results)
             //console.log(response.data.results.length);
-            console.log(movie_list.length)
+            //console.log(movie_list.length)
             //console.log(movie_list)
         })
         .catch((error) => {

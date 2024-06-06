@@ -2,42 +2,48 @@ import typeorm from "typeorm";
 
 const { MigrationInterface, QueryRunner } = typeorm;
 
-export default class  $npmConfigName1717599482367 {
-    name = ' $npmConfigName1717599482367'
+export default class  $npmConfigName1717676638695 {
+    name = ' $npmConfigName1717676638695'
 
     async up(queryRunner) {
         await queryRunner.query(`
-            DROP INDEX "IDX_e59764a417d4f8291747b744fa"
+            CREATE TABLE "genre" (
+                "id" integer PRIMARY KEY NOT NULL,
+                "name" varchar NOT NULL,
+                CONSTRAINT "UQ_dd8cd9e50dd049656e4be1f7e8c" UNIQUE ("name")
+            )
         `);
         await queryRunner.query(`
-            DROP INDEX "IDX_dff457c114a6294863814818b0"
+            CREATE TABLE "movie" (
+                "id" integer PRIMARY KEY NOT NULL,
+                "title" varchar NOT NULL,
+                "release_date" varchar NOT NULL,
+                "poster_path" varchar NOT NULL,
+                "backdrop_path" varchar,
+                "description" varchar NOT NULL,
+                "popularity" float NOT NULL
+            )
         `);
         await queryRunner.query(`
-            CREATE TABLE "temporary_genre_movies_movie" (
+            CREATE TABLE "rating" (
+                "id" integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+                "value" integer NOT NULL,
+                "userId" integer,
+                "movieId" integer
+            )
+        `);
+        await queryRunner.query(`
+            CREATE TABLE "genre_movies_movie" (
                 "genreId" integer NOT NULL,
                 "movieId" integer NOT NULL,
-                CONSTRAINT "FK_dff457c114a6294863814818b0f" FOREIGN KEY ("genreId") REFERENCES "genre" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
                 PRIMARY KEY ("genreId", "movieId")
             )
         `);
         await queryRunner.query(`
-            INSERT INTO "temporary_genre_movies_movie"("genreId", "movieId")
-            SELECT "genreId",
-                "movieId"
-            FROM "genre_movies_movie"
-        `);
-        await queryRunner.query(`
-            DROP TABLE "genre_movies_movie"
-        `);
-        await queryRunner.query(`
-            ALTER TABLE "temporary_genre_movies_movie"
-                RENAME TO "genre_movies_movie"
+            CREATE INDEX "IDX_dff457c114a6294863814818b0" ON "genre_movies_movie" ("genreId")
         `);
         await queryRunner.query(`
             CREATE INDEX "IDX_e59764a417d4f8291747b744fa" ON "genre_movies_movie" ("movieId")
-        `);
-        await queryRunner.query(`
-            CREATE INDEX "IDX_dff457c114a6294863814818b0" ON "genre_movies_movie" ("genreId")
         `);
         await queryRunner.query(`
             CREATE TABLE "movie_genres_genre" (
@@ -53,52 +59,42 @@ export default class  $npmConfigName1717599482367 {
             CREATE INDEX "IDX_1996ce31a9e067304ab168d671" ON "movie_genres_genre" ("genreId")
         `);
         await queryRunner.query(`
-            CREATE TABLE "temporary_movie" (
+            CREATE TABLE "temporary_rating" (
                 "id" integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-                "name" varchar NOT NULL,
-                "release_date" varchar NOT NULL,
-                "backdrop_path" varchar NOT NULL,
-                "poster_path" varchar NOT NULL,
-                "description" varchar NOT NULL,
-                "popularity" integer NOT NULL
+                "value" integer NOT NULL,
+                "userId" integer,
+                "movieId" integer,
+                CONSTRAINT "FK_a6c53dfc89ba3188b389ef29a62" FOREIGN KEY ("userId") REFERENCES "user" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION,
+                CONSTRAINT "FK_1a3badf27affbca3a224f01f7de" FOREIGN KEY ("movieId") REFERENCES "movie" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION
             )
         `);
         await queryRunner.query(`
-            INSERT INTO "temporary_movie"(
-                    "id",
-                    "name",
-                    "release_date",
-                    "backdrop_path",
-                    "poster_path",
-                    "description"
-                )
+            INSERT INTO "temporary_rating"("id", "value", "userId", "movieId")
             SELECT "id",
-                "name",
-                "release_date",
-                "backdrop_path",
-                "poster_path",
-                "description"
-            FROM "movie"
+                "value",
+                "userId",
+                "movieId"
+            FROM "rating"
         `);
         await queryRunner.query(`
-            DROP TABLE "movie"
+            DROP TABLE "rating"
         `);
         await queryRunner.query(`
-            ALTER TABLE "temporary_movie"
-                RENAME TO "movie"
-        `);
-        await queryRunner.query(`
-            DROP INDEX "IDX_e59764a417d4f8291747b744fa"
+            ALTER TABLE "temporary_rating"
+                RENAME TO "rating"
         `);
         await queryRunner.query(`
             DROP INDEX "IDX_dff457c114a6294863814818b0"
+        `);
+        await queryRunner.query(`
+            DROP INDEX "IDX_e59764a417d4f8291747b744fa"
         `);
         await queryRunner.query(`
             CREATE TABLE "temporary_genre_movies_movie" (
                 "genreId" integer NOT NULL,
                 "movieId" integer NOT NULL,
                 CONSTRAINT "FK_dff457c114a6294863814818b0f" FOREIGN KEY ("genreId") REFERENCES "genre" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
-                CONSTRAINT "FK_e59764a417d4f8291747b744faa" FOREIGN KEY ("movieId") REFERENCES "movie" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+                CONSTRAINT "FK_e59764a417d4f8291747b744faa" FOREIGN KEY ("movieId") REFERENCES "movie" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION,
                 PRIMARY KEY ("genreId", "movieId")
             )
         `);
@@ -116,10 +112,10 @@ export default class  $npmConfigName1717599482367 {
                 RENAME TO "genre_movies_movie"
         `);
         await queryRunner.query(`
-            CREATE INDEX "IDX_e59764a417d4f8291747b744fa" ON "genre_movies_movie" ("movieId")
+            CREATE INDEX "IDX_dff457c114a6294863814818b0" ON "genre_movies_movie" ("genreId")
         `);
         await queryRunner.query(`
-            CREATE INDEX "IDX_dff457c114a6294863814818b0" ON "genre_movies_movie" ("genreId")
+            CREATE INDEX "IDX_e59764a417d4f8291747b744fa" ON "genre_movies_movie" ("movieId")
         `);
         await queryRunner.query(`
             DROP INDEX "IDX_985216b45541c7e0ec644a8dd4"
@@ -191,10 +187,10 @@ export default class  $npmConfigName1717599482367 {
             CREATE INDEX "IDX_985216b45541c7e0ec644a8dd4" ON "movie_genres_genre" ("movieId")
         `);
         await queryRunner.query(`
-            DROP INDEX "IDX_dff457c114a6294863814818b0"
+            DROP INDEX "IDX_e59764a417d4f8291747b744fa"
         `);
         await queryRunner.query(`
-            DROP INDEX "IDX_e59764a417d4f8291747b744fa"
+            DROP INDEX "IDX_dff457c114a6294863814818b0"
         `);
         await queryRunner.query(`
             ALTER TABLE "genre_movies_movie"
@@ -204,7 +200,6 @@ export default class  $npmConfigName1717599482367 {
             CREATE TABLE "genre_movies_movie" (
                 "genreId" integer NOT NULL,
                 "movieId" integer NOT NULL,
-                CONSTRAINT "FK_dff457c114a6294863814818b0f" FOREIGN KEY ("genreId") REFERENCES "genre" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
                 PRIMARY KEY ("genreId", "movieId")
             )
         `);
@@ -218,44 +213,33 @@ export default class  $npmConfigName1717599482367 {
             DROP TABLE "temporary_genre_movies_movie"
         `);
         await queryRunner.query(`
-            CREATE INDEX "IDX_dff457c114a6294863814818b0" ON "genre_movies_movie" ("genreId")
-        `);
-        await queryRunner.query(`
             CREATE INDEX "IDX_e59764a417d4f8291747b744fa" ON "genre_movies_movie" ("movieId")
         `);
         await queryRunner.query(`
-            ALTER TABLE "movie"
-                RENAME TO "temporary_movie"
+            CREATE INDEX "IDX_dff457c114a6294863814818b0" ON "genre_movies_movie" ("genreId")
         `);
         await queryRunner.query(`
-            CREATE TABLE "movie" (
+            ALTER TABLE "rating"
+                RENAME TO "temporary_rating"
+        `);
+        await queryRunner.query(`
+            CREATE TABLE "rating" (
                 "id" integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-                "name" varchar NOT NULL,
-                "release_date" varchar NOT NULL,
-                "backdrop_path" varchar NOT NULL,
-                "poster_path" varchar NOT NULL,
-                "description" varchar NOT NULL
+                "value" integer NOT NULL,
+                "userId" integer,
+                "movieId" integer
             )
         `);
         await queryRunner.query(`
-            INSERT INTO "movie"(
-                    "id",
-                    "name",
-                    "release_date",
-                    "backdrop_path",
-                    "poster_path",
-                    "description"
-                )
+            INSERT INTO "rating"("id", "value", "userId", "movieId")
             SELECT "id",
-                "name",
-                "release_date",
-                "backdrop_path",
-                "poster_path",
-                "description"
-            FROM "temporary_movie"
+                "value",
+                "userId",
+                "movieId"
+            FROM "temporary_rating"
         `);
         await queryRunner.query(`
-            DROP TABLE "temporary_movie"
+            DROP TABLE "temporary_rating"
         `);
         await queryRunner.query(`
             DROP INDEX "IDX_1996ce31a9e067304ab168d671"
@@ -267,38 +251,22 @@ export default class  $npmConfigName1717599482367 {
             DROP TABLE "movie_genres_genre"
         `);
         await queryRunner.query(`
-            DROP INDEX "IDX_dff457c114a6294863814818b0"
-        `);
-        await queryRunner.query(`
             DROP INDEX "IDX_e59764a417d4f8291747b744fa"
         `);
         await queryRunner.query(`
-            ALTER TABLE "genre_movies_movie"
-                RENAME TO "temporary_genre_movies_movie"
+            DROP INDEX "IDX_dff457c114a6294863814818b0"
         `);
         await queryRunner.query(`
-            CREATE TABLE "genre_movies_movie" (
-                "genreId" integer NOT NULL,
-                "movieId" integer NOT NULL,
-                CONSTRAINT "FK_e59764a417d4f8291747b744faa" FOREIGN KEY ("movieId") REFERENCES "movie" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION,
-                CONSTRAINT "FK_dff457c114a6294863814818b0f" FOREIGN KEY ("genreId") REFERENCES "genre" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
-                PRIMARY KEY ("genreId", "movieId")
-            )
+            DROP TABLE "genre_movies_movie"
         `);
         await queryRunner.query(`
-            INSERT INTO "genre_movies_movie"("genreId", "movieId")
-            SELECT "genreId",
-                "movieId"
-            FROM "temporary_genre_movies_movie"
+            DROP TABLE "rating"
         `);
         await queryRunner.query(`
-            DROP TABLE "temporary_genre_movies_movie"
+            DROP TABLE "movie"
         `);
         await queryRunner.query(`
-            CREATE INDEX "IDX_dff457c114a6294863814818b0" ON "genre_movies_movie" ("genreId")
-        `);
-        await queryRunner.query(`
-            CREATE INDEX "IDX_e59764a417d4f8291747b744fa" ON "genre_movies_movie" ("movieId")
+            DROP TABLE "genre"
         `);
     }
 }
