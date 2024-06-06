@@ -92,7 +92,7 @@ router.delete('/id', function (req, res) {
     .getRepository(Movie)
     .find({
       where : {title: Like(`%${req.params.title}%`)}, 
-      order: { popularity: 'DESC' } 
+      //order: { popularity: 'DESC' } 
     })
     .then(function (movies) {
       res.json({ movies: movies });

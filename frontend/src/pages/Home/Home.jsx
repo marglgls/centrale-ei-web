@@ -45,11 +45,12 @@ function Home() {
       // Reset page to initial one
       setPage(1);
     } else {
+      console.log(movieTitle);
           axios
-      .get(`http://localhost:8000/search/${movieTitle}}`)
+      .get(`http://localhost:8000/movies/search/${movieTitle}`)
       .then((response) => {
-        setMovieList(response.data.results);
-        console.log(response.data.results);
+        setMovieList(response.data.movies);
+        console.log(response.data.movies);
       })
       .catch((error) => {
         // Do something if call failed
