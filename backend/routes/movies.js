@@ -4,6 +4,25 @@ import Movie from '../entities/movies.js';
 const router = express.Router();
 import { Like } from "typeorm";
 
+function rate_user(id_user) {
+    appDataSource
+    .getRepository(Rating)
+    .find({
+        relations: {
+            user: true,
+            movie: true,
+        },
+        where: {
+            user: {
+                id: id_user}
+    }
+})
+    .then(function(ratings)
+    {
+        
+    });
+}
+
 router.get('/', function (req, res) {
     appDataSource
       .getRepository(Movie)
@@ -21,8 +40,8 @@ router.get('/id', function (req, res) {
         id: req.params.movieId
         },
     })
-    .then(function (movies) {
-        if (movies == {}){
+    .then(function (movie) {
+        if (movie == {}){
             console.error(error);
             res.status(404).json({
             message: `Not found`,
@@ -89,6 +108,8 @@ router.delete('/id', function (req, res) {
 
   router.get('/search/:title', function (req, res) {
     console.log(req);
+    if (req.data.title != '')
+        {
     appDataSource
     .getRepository(Movie)
     .find({
@@ -100,6 +121,17 @@ router.delete('/id', function (req, res) {
     }).catch(function (error) {
       res.status(404).json({ error: 'Not found!' });
     });
+} else {
+    appDataSource
+    .getRepository(Movie)
+    .find({
+    })
+    .then(function (movies) {
+      res.json({ movies: movies });
+    }).catch(function (error) {
+      res.status(404).json({ error: 'Not found!' });
+    });
+}
 }
   );
 

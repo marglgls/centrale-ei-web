@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { AiFillLike } from "react-icons/ai";
 import { AiFillDislike } from "react-icons/ai";
+import { appDataSource } from '../../../../backend/datasource.js';
+import Movie from '../../../../backend/entities/movies.js';
 
 function DetailsMovie(props) {
     const {idMovie} = useParams();
@@ -24,6 +26,21 @@ function DetailsMovie(props) {
             console.log(error)
       });
       }, []);
+  //     useEffect(() => {
+  //     appDataSource
+  //   .getRepository(Movie)
+  //   .find({
+  //     where : {id: idMovie}, 
+  //     order: { popularity: 'DESC' } 
+  //   })
+  //   .then((response) => {
+  //         setMovieData(response);
+  //         console.log(response);
+  //       })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //   });
+  // }, []);
 
       const [color, setColor] = useState('gray');
 
