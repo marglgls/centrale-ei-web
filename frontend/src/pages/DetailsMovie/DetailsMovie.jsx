@@ -8,7 +8,7 @@ import { AiFillDislike } from "react-icons/ai";
 function DetailsMovie(props) {
     const {idMovie} = useParams();
     const [movieData, setMovieData] = useState({});
-    useEffect(() => {
+    useEffect(() => { /*
         axios
       .get(`https://api.themoviedb.org/3/movie/${idMovie}`, {headers: {
         accept: 'application/json',
@@ -22,7 +22,17 @@ function DetailsMovie(props) {
       })
       .catch((error) => {
             console.log(error)
-      });
+      }); */
+      axios
+      .get(`http://localhost:8000/details/:id`)
+      .then((response) => {
+        //setPage(1);
+        setMovieData(response.data);
+      })
+      .catch((error) => {
+        // Do something if call failed
+        console.log(error)
+  });
       }, []);
 
       const [color, setColor] = useState('gray');
