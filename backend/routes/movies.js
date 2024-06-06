@@ -3,10 +3,11 @@ import { appDataSource } from '../datasource.js';
 import Movie from '../entities/movies.js';
 const router = express.Router();
 import { Like } from "typeorm";
+import Rating from '../entities/ratings.js';
 
 function rate_user(id_user) {
-    appDataSource
-    .getRepository(Rating)
+    const ratingRepository = appDataSource.getRepository(Rating);
+    ratingRepository
     .find({
         relations: {
             user: true,
@@ -19,13 +20,13 @@ function rate_user(id_user) {
 })
     .then(function(ratings)
     {
-        
+
     });
 }
 
 router.get('/', function (req, res) {
-    appDataSource
-      .getRepository(Movie)
+    const movieRepository = appDataSource.getRepository(Movie);
+    movieRepository
       .find({order: { popularity: 'DESC' } })
       .then(function (movies) {
         res.json({ movies: movies });
@@ -33,8 +34,8 @@ router.get('/', function (req, res) {
   });
 
 router.get('/id', function (req, res) {
-    appDataSource
-    .getRepository(Movie)
+    const movieRepository = appDataSource.getRepository(Movie);
+    movieRepository
     .find({
         where: {
         id: req.params.movieId
@@ -89,8 +90,8 @@ router.post('/new', function (req, res) {
 });
 
 router.delete('/id', function (req, res) {
-    appDataSource
-      .getRepository(Movie)
+    const movieRepository = appDataSource.getRepository(Movie);
+    movieRepository
       .delete({ id: req.body.id })
       .then(function (result) {
         if(result.affected == 0) {
@@ -110,8 +111,8 @@ router.delete('/id', function (req, res) {
     console.log(req);
     if (req.data.title != '')
         {
-    appDataSource
-    .getRepository(Movie)
+    const movieRepository = appDataSource.getRepository(Movie);
+    movieRepository
     .find({
       where : {title: Like(`%${req.params.title}%`)}, 
       order: { popularity: 'DESC' } 
@@ -122,8 +123,8 @@ router.delete('/id', function (req, res) {
       res.status(404).json({ error: 'Not found!' });
     });
 } else {
-    appDataSource
-    .getRepository(Movie)
+    const movieRepository = appDataSource.getRepository(Movie);
+    movieRepository
     .find({
     })
     .then(function (movies) {
