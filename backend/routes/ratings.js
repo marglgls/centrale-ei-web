@@ -123,7 +123,7 @@ router.get('/recommend/:userId', async function (req, res) {
       .getRepository(Movie)
       .find({
         where : {id : In(recommend_id_list)},
-        order: { popularity: 'DESC' } })
+        order: { id: 'DESC' } })
       .then(function (movies) {
         res.json({ movies: movies });
       });

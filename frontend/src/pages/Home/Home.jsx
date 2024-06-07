@@ -19,17 +19,19 @@ function Home() {
 
   // Fetch a page of movies on the database
   useEffect(() => {
+  if (recomBool == false) {
     axios
-  .get(`http://localhost:8000/movies/page/${page}`)
-  .then((response) => {
-    //console.log(response.data.movies);
-		setMovieList(response.data.movies);
-  })
-  .catch((error) => {
-		// Do something if call failed
-		console.log(error)
-  });
-  }, [page]);
+    .get(`http://localhost:8000/movies/page/${page}`)
+    .then((response) => {
+      //console.log(response.data.movies);
+      setMovieList(response.data.movies);
+    })
+    .catch((error) => {
+      // Do something if call failed
+      console.log(error)
+    });
+  }
+  }, [page,recomBool]);
 
 
   // Fetch by title
@@ -97,9 +99,7 @@ function Home() {
     <div className="App">
         <img src={logo} className="App-logo" alt="logo" />
         <div> Affichage personnalisé : <input type="checkbox" onChange={()=>{toggleBool()}} checked={recomBool}></input></div>
-        <p>
-          Qu'allez-vous regarder aujourd'hui ? 
-        </p>
+        <br/>
         <input className="search-bar" placeholder="Rechercher un film" value={movieTitle} onChange={e => setMovieTitle(e.target.value)}/>
         <div className="movie-container">
           {movieList.map(movie => <Movie key={movie.id} data={movie}/>)}

@@ -50,8 +50,11 @@ async function list_rating_movies(list_rating_genres){
                     const new_movies = await movie
                     .createQueryBuilder('movie')
                     .innerJoin('movie.genres', 'genre')
+                    //.innerJoin('movie.ratings', 'rating')
                     .where('genre.name = :genre', genre_rated )
                     .andWhere('movie.id NOT IN (:...ids)', { ids: takenMovieIds })
+                    //.andWhere('rating.userId =:userId', { userId: 1 })
+                    //.andWhere('rating.value >= 0')
                     .limit(nb)
                     .getMany();
                     console.log(new_movies.length);
