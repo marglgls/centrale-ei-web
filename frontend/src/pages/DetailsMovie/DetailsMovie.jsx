@@ -24,10 +24,11 @@ function DetailsMovie(props) {
             console.log(error)
       }); */
       axios
-      .get(`http://localhost:8000/details/:id`)
+      .get(`http://localhost:8000/movies/details/${idMovie}`)
       .then((response) => {
         //setPage(1);
-        setMovieData(response.data);
+        setMovieData(response.data.movie[0]);
+        console.log(response.data);
       })
       .catch((error) => {
         // Do something if call failed
