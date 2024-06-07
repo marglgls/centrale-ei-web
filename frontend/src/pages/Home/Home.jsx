@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import Movie from '../../components/Movie/Movie.jsx';
 
 function Home() {
-
   const [movieTitle, setMovieTitle] = useState('');
   const [page, setPage] = useState(1);
   const [movieList, setMovieList] = useState([]);

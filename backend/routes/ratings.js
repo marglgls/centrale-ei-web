@@ -11,11 +11,16 @@ const router = express.Router();
 router.get('/user=:idUser&movie=:idMovie', function (req, res) {
     appDataSource
       .getRepository(Rating)
-      .find({})
+      .find({where : {
+        "movie.id": req.params.idMovie,
+        "user.id": req.params.idUser
+        }})
       .then(function (ratings) {
         console.log("UserID :", req.params.idUser);
         console.log("MovieID :", req.params.idMovie);
         res.json({ rating: ratings });
+      }).catch( (error) => {
+        return res.status(404).json({ message: 'Rating not found' });
       });
   });
 
