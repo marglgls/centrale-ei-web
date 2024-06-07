@@ -169,7 +169,7 @@ function DetailsMovie(props) {
             <span className="details-date"> Date de sortie : {movieData.release_date} </span> <br/>
             <span className="details-genre"> 
               {movieData.genres?.map(genre => <span key={genre.id}> -{genre.name}- </span>)} </span> <br/>
-            <span className="details-description"> <p>{movieData.overview}</p> </span> <br/>
+            <span className="details-description"> <p>{movieData.description}</p> </span> <br/>
             <span className="details-duration"> Durée : {movieData.runtime} min </span> <br/>
           </div>
           <div className="button-container">
