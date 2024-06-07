@@ -64,11 +64,8 @@ function Home() {
 
   return (
     <div className="App">
-        <h1>CINEMATICS</h1>
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Qu'allez-vous regarder aujourd'hui ? 
-        </p>
+       
         <input className="search-bar" placeholder="Rechercher un film" value={movieTitle} onChange={e => setMovieTitle(e.target.value)}/>
         <div className="movie-container">
           {movieList.map(movie => <Movie key={movie.id} data={movie}/>)}
