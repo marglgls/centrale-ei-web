@@ -95,7 +95,6 @@ function Home() {
 
   return (
     <div className="App">
-        <h1>CINEMATICS</h1>
         <img src={logo} className="App-logo" alt="logo" />
         <div> Affichage personnalisé : <input type="checkbox" onChange={()=>{toggleBool()}} checked={recomBool}></input></div>
         <p>

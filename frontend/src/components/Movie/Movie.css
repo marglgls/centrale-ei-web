@@ -6,7 +6,7 @@
     justify-content: center;
     align-content: flex-start;
     align-items: center;
-    margin : 2px;
+    margin-bottom : 10px;
     border : 0px solid green;
     width:200px;
   
@@ -29,14 +29,14 @@
 
 .movie-image {
     width : 200px;
-    transition: transform 0.2 ease-in-out;
+    
 
 }
 
 .movie-image:hover {
     width: 220px;
-    z-index: 20; 
     position: absolute;
+    transition: 0.2s ease-in-out;
 }
 
 
