@@ -5,10 +5,11 @@ import { useEffect, useState } from 'react';
 import Movie from '../../components/Movie/Movie.jsx';
 
 function Home() {
-  const [UserId, setUserId] = useState(1);
   const [movieTitle, setMovieTitle] = useState('');
   const [page, setPage] = useState(1);
   const [movieList, setMovieList] = useState([]);
+  const [userId, setUserId] = useState(1);
+  const [recomBool,setRecomBool] = useState(false);
   
   const modifyPage = (c) => {
     if (1 <= page + c ) {
@@ -18,17 +19,20 @@ function Home() {
 
   // Fetch a page of movies on the database
   useEffect(() => {
+  if (recomBool == false) {
     axios
   .get(`http://localhost:8000/movies/page/${page}`)
   .then((response) => {
-    //console.log(response.data.movies);
+    console.log("popular");
+    console.log(response.data.movies);
 		setMovieList(response.data.movies);
   })
   .catch((error) => {
 		// Do something if call failed
 		console.log(error)
   });
-  }, [page]);
+  }
+  }, [page,recomBool]);
 
 
   // Fetch by title
@@ -61,12 +65,40 @@ function Home() {
     }
   },[movieTitle]);
 
+    // Use recommandation algorithm
 
+    
+
+    const toggleBool = () => {
+      if (recomBool == true) {
+        setRecomBool(false);
+        setPage(1);
+      } else {
+        setRecomBool(true);
+      }
+    }
+    
+    useEffect(() => {
+      console.log('Recommand :', recomBool);
+      if (recomBool == true) {
+        axios
+  .get(`http://localhost:8000/ratings/recommend/${userId}`)
+  .then((response) => {
+    console.log(response.data);
+		setMovieList(response.data.movies);
+  })
+  .catch((error) => {
+		// Do something if call failed
+		console.log(error)
+  })
+      }
+    }, [recomBool]);
 
   return (
     <div className="App">
         <h1>CINEMATICS</h1>
         <img src={logo} className="App-logo" alt="logo" />
+        <div> Affichage personnalisé : <input type="checkbox" onChange={()=>{toggleBool()}} checked={recomBool}></input></div>
         <p>
           Qu'allez-vous regarder aujourd'hui ? 
         </p>
