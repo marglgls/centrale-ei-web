@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react';
 import Movie from '../../components/Movie/Movie.jsx';
 
 function Home() {
-  const [UserId, setUserId] = useState(1);
+  const [userId, setUserId] = useState(1);
+  const [recomBool,setRecomBool] = useState(false);
   const [movieTitle, setMovieTitle] = useState('');
   const [page, setPage] = useState(1);
   const [movieList, setMovieList] = useState([]);
@@ -61,12 +62,42 @@ function Home() {
     }
   },[movieTitle]);
 
+  
+    // Use recommandation algorithm
+
+    
+
+    const toggleBool = () => {
+      if (recomBool == true) {
+        setRecomBool(false);
+        setPage(1);
+      } else {
+        setRecomBool(true);
+      }
+    }
+    
+    useEffect(() => {
+      console.log('Recommand :', recomBool);
+      if (recomBool == true) {
+        axios
+  .get(`http://localhost:8000/ratings/recommend/${userId}`)
+  .then((response) => {
+    console.log(response.data);
+		setMovieList(response.data.movies);
+  })
+  .catch((error) => {
+		// Do something if call failed
+		console.log(error)
+  })
+      }
+    }, [recomBool]);
 
 
   return (
     <div className="App">
         <h1>CINEMATICS</h1>
         <img src={logo} className="App-logo" alt="logo" />
+        <div> Affichage personnalisé : <input type="checkbox" onChange={()=>{toggleBool()}} checked={recomBool}></input></div>
         <p>
           Qu'allez-vous regarder aujourd'hui ? 
         </p>

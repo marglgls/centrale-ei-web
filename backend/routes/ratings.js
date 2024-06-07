@@ -3,8 +3,10 @@ import { appDataSource } from '../datasource.js';
 import Rating from '../entities/ratings.js';
 import User from '../entities/user.js';
 import Movie from '../entities/movies.js';
+import { In } from 'typeorm';
 import {get_recommendation} from '../recommendation.js';
 const router = express.Router();
+
 
 
 // Get the rating associated to an user and a movie
@@ -116,11 +118,11 @@ router.delete('/:id',  function (req, res) {
 
 router.get('/recommend/:userId', async function (req, res) {
   const recommend_id_list = await get_recommendation(req.params.userId);
-  console.log(recommend_id_list);
+  console.log('taille ', recommend_id_list.length);
   appDataSource
       .getRepository(Movie)
       .find({
-        where : {id: req.params.id},
+        where : {id : In(recommend_id_list)},
         order: { popularity: 'DESC' } })
       .then(function (movies) {
         res.json({ movies: movies });
