@@ -6,7 +6,10 @@ import Genre from './entities/genre.js'
 import { Like } from "typeorm";
 import Rating from './entities/ratings.js';
 import { appDataSource } from './datasource.js';
-await appDataSource.initialize();
+
+
+//await appDataSource.initialize();
+
 async function rating_genres(userId){
     //await appDataSource.initialize();
     const result = await appDataSource.getRepository(Rating)
@@ -67,13 +70,18 @@ async function list_rating_movies(list_rating_genres){
     list_movies.sort((a, b) => b.popularity - a.popularity);
     let list_id_movies = []
     for (let movie of list_movies){
-        list_id_movies = list_id_movies + [movie.id]
+        list_id_movies = list_id_movies.concat(movie.id);
     }
-    //console.log(list_id_movies)
+    console.log(list_id_movies);
     return (list_id_movies);
 }
-const res = await rating_genres(1)
-console.log(res)
-await list_rating_movies(res)
-console.log('fin')
+
+export async function get_recommendation (userId) {
+    const res = await rating_genres(userId);
+    //console.log(res);
+    const result = await list_rating_movies(res);
+    console.log(result);
+    console.log('fin');
+    return result;
+}
 
