@@ -103,6 +103,21 @@ router.delete('/id', function (req, res) {
       });
   });
 
+  router.get('/details/:id', function (req, res) {
+    console.log(req.params);
+    console.log('requete');
+    appDataSource
+    .getRepository(Movie)
+    .find({
+      where : {id: req.params.id}
+    })
+    .then(function (movies) {
+        console.log(movies);
+      res.json({ movie: movies });
+    }).catch(function (error) {
+      res.status(404).json({ error: 'Not found!' });
+    });
+  });
 
   router.get('/search/:title', function (req, res) {
     //console.log(req);
