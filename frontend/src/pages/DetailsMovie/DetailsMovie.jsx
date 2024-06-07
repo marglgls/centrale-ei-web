@@ -12,21 +12,35 @@ function DetailsMovie(props) {
     const [idRating, setIdRating] = useState(0);
 
   
-    useEffect(() => {
-        axios
-      .get(`https://api.themoviedb.org/3/movie/${idMovie}`, {headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZjlmNjAwMzY4MzMzODNkNGIwYjNhNzJiODA3MzdjNCIsInN1YiI6IjY0NzA5YmE4YzVhZGE1MDBkZWU2ZTMxMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Em7Y9fSW94J91rbuKFjDWxmpWaQzTitxRKNdQ5Lh2Eo'
-      }})
-      .then((response) => {
-        setMovieData(response.data);
-        console.log(response.data);
-      })
-      .catch((error) => {
-            console.log(error)
-      });
-      }, []);
+    useEffect(() => { /*
+      axios
+    .get(`https://api.themoviedb.org/3/movie/${idMovie}`, {headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZjlmNjAwMzY4MzMzODNkNGIwYjNhNzJiODA3MzdjNCIsInN1YiI6IjY0NzA5YmE4YzVhZGE1MDBkZWU2ZTMxMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Em7Y9fSW94J91rbuKFjDWxmpWaQzTitxRKNdQ5Lh2Eo'
+    }})
+  // Fetch movie data for a given id
 
+    .then((response) => {
+      setMovieData(response.data);
+      console.log(response.data);
+    })
+    .catch((error) => {
+          console.log(error)
+    }); */
+    axios
+    .get(`http://localhost:8000/movies/details/${idMovie}`)
+    .then((response) => {
+      //setPage(1);
+      setMovieData(response.data.movie[0]);
+      console.log(response.data);
+    })
+    .catch((error) => {
+      // Do something if call failed
+      console.log(error)
+});
+    }, []);
+
+    
       const [valueLike, setValueLike] = useState(0);
       const colorLike_dict = {'1' : 'green', '0' : 'gray', '-1' : 'gray'}
       const colorDislike_dict = {'1' : 'gray', '0' : 'gray', '-1' : 'red'}
