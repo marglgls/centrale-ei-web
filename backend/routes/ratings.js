@@ -3,6 +3,7 @@ import { appDataSource } from '../datasource.js';
 import Rating from '../entities/ratings.js';
 import User from '../entities/user.js';
 import Movie from '../entities/movies.js';
+import {get_recommendation} from '../recommendation.js';
 const router = express.Router();
 
 
@@ -10,11 +11,16 @@ const router = express.Router();
 router.get('/user=:idUser&movie=:idMovie', function (req, res) {
     appDataSource
       .getRepository(Rating)
-      .find({})
+      .find({where : {
+        "movie.id": req.params.idMovie,
+        "user.id": req.params.idUser
+        }})
       .then(function (ratings) {
         console.log("UserID :", req.params.idUser);
         console.log("MovieID :", req.params.idMovie);
         res.json({ rating: ratings });
+      }).catch( (error) => {
+        return res.status(404).json({ message: 'Rating not found' });
       });
   });
 
@@ -105,6 +111,20 @@ router.delete('/:id',  function (req, res) {
     .catch(function () {
       res.status(500).json({ message: 'Error while deleting the rating' });
     });
+});
+
+
+router.get('/recommend/:userId', async function (req, res) {
+  const recommend_id_list = await get_recommendation(req.params.userId);
+  console.log(recommend_id_list);
+  appDataSource
+      .getRepository(Movie)
+      .find({
+        where : {id: req.params.id},
+        order: { popularity: 'DESC' } })
+      .then(function (movies) {
+        res.json({ movies: movies });
+      });
 });
 
 

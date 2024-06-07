@@ -109,7 +109,8 @@ router.delete('/id', function (req, res) {
     appDataSource
     .getRepository(Movie)
     .find({
-      where : {id: req.params.id}
+      where : {id: req.params.id},
+      relations: ['genres'],
     })
     .then(function (movies) {
         console.log(movies);
