@@ -15,7 +15,8 @@ const Movie = new typeorm.EntitySchema({
     poster_path: {type : String},
     backdrop_path: {type: String, nullable: true},
     description: {type: String},
-    popularity: {type: 'float'}
+    popularity: {type: 'float'},
+    runtime: {type: String, nullable: true},
   },
   relations: {
     genres: {

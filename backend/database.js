@@ -75,6 +75,25 @@ async function registerFetchMoviesGenres(fetched_movie_list, fetched_genre) {
     for (let movie of fetched_movie_list.movie_list)
     {
         let liste_genre = [];
+        const idMovie = movie.id;
+        let runtime = 0
+        await axios
+        .get(`https://api.themoviedb.org/3/movie/${idMovie}`, {
+            headers: {
+                accept: 'application/json',
+                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZjlmNjAwMzY4MzMzODNkNGIwYjNhNzJiODA3MzdjNCIsInN1YiI6IjY0NzA5YmE4YzVhZGE1MDBkZWU2ZTMxMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Em7Y9fSW94J91rbuKFjDWxmpWaQzTitxRKNdQ5Lh2Eo'
+            }
+        })
+        .then((response) => {
+            //console.log(response)
+            runtime = response.data.runtime;
+            //console.log(runtime);
+        })
+        .catch((error) => {
+            // Do something if call failed
+            console.log(error)
+        });
+        
             for (let id of movie.genre_ids) {
                 //let id_st = id.toString()
                 let add_genre = await genreRepository.findOne({where: {id: id}})
@@ -89,7 +108,8 @@ async function registerFetchMoviesGenres(fetched_movie_list, fetched_genre) {
             backdrop_path: movie.backdrop_path,
             description: movie.overview,
             popularity: movie.popularity,
-            genres: liste_genre
+            genres: liste_genre,
+            runtime: runtime,
         });
         movieRepository.save(newMovie);
         //console.log(newMovie);
